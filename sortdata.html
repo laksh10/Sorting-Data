@@ -1,0 +1,63 @@
+<html>
+<head><title>Sorting Data</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<style>
+table {background-color: plum; padding:5px; color:white; font-family: calibri; font-size: 20px;}
+table td {padding:5px;}
+table thead {background-color: lightblue;}
+
+body {background-color: black}
+
+
+
+</style>
+
+
+</head>
+<body ng-app="sortingData" >
+<div ng-controller="sortCtrl">
+<center>
+<h2 style="color:white; font-family:calibri">Sorting Data in Angular </h2>
+<font style="color:white; font-family:calibri">Order By:</font> <select ng-model="sortColumns" style="border:2px solid black; border-radius: 3px;">
+          <option value="name">Name</option>
+          <option value="dob">Date of Birth</option>
+          <option value="gender">Gender</option>
+          <option value="-stipend">Stipend</option>
+          </select>
+
+<br>
+<table>
+<thead>
+<tr ><th>Character</th>
+    <th>Date of Birth</th>
+    <th>Gender</th>
+    <th>Stipend</th></tr>
+    </thead>
+<tbody>
+<tr ng-repeat="person in characters | orderBy:sortColumns">
+          <td>{{person.name}}</td>
+          <td>{{person.dob | date:"MMMM/dd/yyyy"}}</td>
+          <td>{{person.gender | uppercase}}</td>
+          <td>{{person.stipend | currency}}</td></tr>
+</tbody></table>
+
+<script>
+var app=angular.module("sortingData", []);
+app.controller("sortCtrl", function($scope){
+	var characters = [
+         {name:"Tobias Eaton", dob:new Date("September 10, 1990"), gender:"Male", stipend:10000},
+         {name:"Jennifer Parker", dob:new Date("July 5, 1983"), gender:"Female", stipend:15000},
+         {name:"Katniss Everdeen", dob:new Date("March 15, 1985"), gender:"Female", stipend:20000},
+         {name:"Draco Malfoy", dob:new Date("May 14, 1997"), gender:"Male", stipend:5000},
+         {name:"Bellatrix Lestrange", dob:new Date("November 23, 1964"), gender:"Female", stipend:30000},
+         {name:"Arya Stark", dob:new Date("February 25, 1992"), gender:"Female", stipend:20000},
+];
+ $scope.characters=characters;
+ $scope.sortColumns="name";
+});
+
+</script>
+</center>
+</body>
+</html>
