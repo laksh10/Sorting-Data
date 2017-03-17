@@ -1,0 +1,63 @@
+<html>
+<head>
+<style>
+table {background-color: crimson; color:white; font-family: calibri; padding:10px;}
+table thead {text-decoration:underline; font-family: times new roman;}
+table td {padding:10px;}
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+
+</head>
+<body ng-app="searchMod">
+<center>
+<div ng-controller="searchCtrl">
+<h3>Search Filter in Angular</h3>
+Search : <input type="text" placeholder="Search Hogwarts Professors" ng-model="searchText.fullname"><br><br>
+<table>
+<thead>
+<tr><th>Professor</th>
+    <th>Gender</th>
+    <th>Subject</th>
+    <th>Salary</th>
+    <th>City</th>
+    </tr></thead>
+ <tbody>
+ <tr ng-repeat="teacher in hogwarts | filter: searchText">
+    <td> {{teacher.fullname}}</td>
+    <td> {{teacher.gender}}</td>
+    <td> {{teacher.subject}}</td>
+    <td> {{teacher.salary}}</td>
+    <td> {{teacher.city}}</td>
+  </tr></tbody></table>
+
+</div>
+</center>
+<script>
+
+var app=angular.module("searchMod", []);
+app.controller("searchCtrl", function($scope){
+	
+	var hogwarts = [
+        {fullname:"Severus Snape", gender:"Male", subject:"Potions", salary:20000, city:"London"},
+        {fullname:"Sybill Trelawney", gender:"Female", subject:"Divination", salary:20000, city:"London"},
+        {fullname:"Albus Dumbledore", gender:"Male", subject:"Transfiguration", salary:20000, city:"London"},
+        {fullname:"Minerva Mcgonagall", gender:"Female", subject:"Transfiguration", salary:20000, city:"London"},
+        {fullname:"Pomona Sprout", gender:"Female", subject:"Herbology", salary:20000, city:"London"},
+        {fullname:"Remus Lupin", gender:"Male", subject:"The Dark Arts", salary:20000, city:"London"}
+
+	];
+
+$scope.hogwarts=hogwarts;
+
+});
+
+
+
+
+</script>
+
+</body>
+</html>
